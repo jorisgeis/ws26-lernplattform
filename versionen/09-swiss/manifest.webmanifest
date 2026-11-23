@@ -1,0 +1,15 @@
+{
+  "name": "StudyOS WS26 · Swiss Data Cockpit",
+  "short_name": "StudyOS 09",
+  "description": "Lern-Cockpit im Internationalen Typografischen Stil: Karteikarten, Quiz, Kurse, E-Mail-Coach, Spickzettel und Lernstatistik.",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

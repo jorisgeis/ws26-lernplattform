@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <title>studyos — WS26 Terminal</title>
+  <link rel="stylesheet" href="../shared/diagrams.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="term" id="app">
+    <header class="statusline" id="statusline" aria-label="Statuszeile">
+      <span class="sl-brand"><span class="sl-cursor" aria-hidden="true">▌</span>STUDYOS<span class="sl-dim">/WS26</span></span>
+      <span class="sl-seg" title="Lernserie (Tage in Folge)"><span class="sl-k">streak</span> <b data-sl="streak">0 Tage</b></span>
+      <span class="sl-seg" title="Tagesziel: Wiederholungen + Quizfragen"><span class="sl-k">heute</span> <b data-sl="today">0/25</b> <span class="sl-bar" data-sl="todaybar"></span></span>
+      <button type="button" class="sl-seg sl-btn" data-act="cards-start" data-arg="all" title="Interleaved Session mit allen fälligen Karten starten"><span class="sl-k">fällig</span> <b data-sl="due">0</b></button>
+      <button type="button" class="sl-seg sl-btn" data-act="pomo-toggle" title="Pomodoro starten/pausieren (Taste p)"><span data-pomo-icon>▶</span> <b data-pomo-time>25:00</b><span class="sl-dim" data-pomo-mode>/25</span></button>
+      <button type="button" class="sl-seg sl-btn" data-act="theme" title="Dark/Light umschalten (theme)"><span data-sl="theme">☾ dark</span></button>
+      <span class="sl-seg sl-clock" data-sl="clock" aria-hidden="true">--:--</span>
+    </header>
+
+    <main class="view" id="view" tabindex="-1" aria-live="off"></main>
+
+    <section class="console" id="console" hidden aria-label="Konsolenausgabe">
+      <div class="console-h">
+        <span class="console-t">stdout</span>
+        <span class="console-actions">
+          <button type="button" class="btn btn-tiny" data-act="cmd" data-arg="clear">clear</button>
+          <button type="button" class="btn btn-tiny" data-act="console-close" title="Schließen (Esc)">x</button>
+        </span>
+      </div>
+      <div class="console-log" id="console-log" role="log" aria-live="polite"></div>
+    </section>
+
+    <form class="cmdline" id="cmdform" autocomplete="off">
+      <label class="prompt" for="cmd" id="prompt"><span class="prompt-user">ws26@studyos</span><span class="prompt-sep">:</span><span class="prompt-path" id="prompt-path">~</span><span class="prompt-sign">$</span></label>
+      <input id="cmd" name="cmd" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" enterkeyhint="go" placeholder="help · cards gp1 · quiz · sheet …  ( : oder / )" aria-describedby="cmd-msg" />
+      <span class="cmd-msg" id="cmd-msg" aria-live="polite"></span>
+      <button type="submit" class="btn btn-run" aria-label="Befehl ausführen">↵</button>
+    </form>
+
+    <nav class="tabbar" id="tabbar" aria-label="Ansichten"></nav>
+  </div>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <div class="print-root" id="print-root" aria-hidden="true"></div>
+  <input type="file" id="import-file" accept="application/json,.json" hidden />
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

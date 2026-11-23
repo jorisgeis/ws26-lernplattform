@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="StudyOS">
+  <meta name="format-detection" content="telephone=no">
+  <title>StudyOS · Native</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="../shared/diagrams.css">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Theme before first paint: stored choice (shared store key), otherwise the system setting.
+    (function () {
+      var t = null;
+      try {
+        var raw = localStorage.getItem('ws26_lernplattform_v1');
+        if (raw) t = JSON.parse(raw).theme || null;
+      } catch (e) { /* ignore */ }
+      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+</head>
+<body>
+  <div class="wallpaper" aria-hidden="true"></div>
+
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Seitenleiste"></aside>
+    <main class="main" id="main">
+      <div class="stack" id="stack"></div>
+    </main>
+    <aside class="inspector" id="inspector" aria-label="Inspektor"></aside>
+  </div>
+
+  <nav class="tabbar" id="tabbar" aria-label="Tabs"></nav>
+
+  <div class="sheet-layer" id="sheet-layer"></div>
+  <div class="alert-layer" id="alert-layer"></div>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Filled right before printing; the only element visible in @media print -->
+  <section class="print-sheet" id="print-sheet" aria-hidden="true"></section>
+
+  <input type="file" id="import-file" accept="application/json,.json" hidden>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

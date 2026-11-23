@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDY/OS — Exam Board WS 26/27</title>
+  <link rel="stylesheet" href="../shared/diagrams.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#view">Zum Inhalt springen</a>
+
+  <header class="masthead">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee"></div>
+    </div>
+
+    <div class="bar">
+      <a class="logo" href="#board" aria-label="Exam Board Startseite">
+        <span class="logo-main">STUDY/OS</span>
+        <span class="logo-sub">EXAM BOARD · WS 26/27</span>
+      </a>
+
+      <div class="stats" id="stats"></div>
+
+      <div class="bar-tools">
+        <div class="pomo" id="pomo" role="group" aria-label="Fokus-Timer">
+          <div class="pomo-fill" id="pomoFill"></div>
+          <span class="pomo-label">FOKUS</span>
+          <span class="pomo-time" id="pomoTime">25:00</span>
+          <button class="pomo-btn" id="pomoToggle" type="button" aria-label="Timer starten">▶</button>
+          <button class="pomo-btn" id="pomoReset" type="button" aria-label="Timer zurücksetzen">↺</button>
+          <button class="pomo-btn pomo-mode" id="pomoMode" type="button" aria-label="Zwischen 25 und 50 Minuten wechseln">25</button>
+        </div>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Farbschema wechseln"></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Hauptnavigation">
+    <a href="#board" data-tab="board">Board</a>
+    <a href="#karten" data-tab="karten">Karten <span class="tab-count" id="tabDue"></span></a>
+    <a href="#quiz" data-tab="quiz">Quiz</a>
+    <a href="#kurs/gdp1" data-tab="kurs">Kurse</a>
+    <a href="#email" data-tab="email">E-Mail</a>
+    <a href="#spick" data-tab="spick">Spickzettel <span class="tab-count" id="tabPins"></span></a>
+    <a href="#methoden" data-tab="methoden">Methoden</a>
+  </nav>
+
+  <main id="view" tabindex="-1"></main>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyOS WS26 — 5 UI-Versionen</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: Canvas; color: CanvasText;
+      max-width: 860px; margin: 0 auto; padding: 48px 20px;
+    }
+    h1 { font-size: 30px; letter-spacing: -0.02em; }
+    p.lead { opacity: .7; margin: 8px 0 28px; }
+    ol { list-style: none; padding: 0; display: grid; gap: 12px; }
+    a.v {
+      display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center;
+      padding: 16px 18px; border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+      border-radius: 12px; color: inherit; text-decoration: none;
+    }
+    a.v:hover { border-color: CanvasText; }
+    .n { font: 700 22px ui-monospace, Menlo, monospace; opacity: .5; }
+    .t { font-weight: 700; font-size: 17px; }
+    .d { opacity: .7; font-size: 14px; margin-top: 2px; }
+    footer { margin-top: 28px; font-size: 13px; opacity: .6; }
+  </style>
+</head>
+<body>
+  <h1>StudyOS WS26 — 10 neue UI/UX-Versionen</h1>
+  <p class="lead">Gleiche Inhalte, gleiche Lernlogik (SM-2, Quiz, Feynman, Email-Coach, Spickzettel), gleicher gespeicherter Fortschritt — zehn komplett verschiedene Oberflächen. 📱💻 = gleichwertig für MacBook und Handy optimiert, installierbar als Web-App.</p>
+  <ol>
+    <li><a class="v" href="01-zen/"><span class="n">01</span><span><div class="t">Zen / Paper</div><div class="d">Ruhige Lese-Spalte, Serif-Typo, ⌘K-Befehlspalette, „Heute“-Seite wie ein Tagesbrief.</div></span></a></li>
+    <li><a class="v" href="02-bento/"><span class="n">02</span><span><div class="t">Bento Glass</div><div class="d">Glas-Kacheln im Bento-Grid, Fortschrittsringe, schwebendes macOS-Dock.</div></span></a></li>
+    <li><a class="v" href="03-terminal/"><span class="n">03</span><span><div class="t">Terminal / TUI</div><div class="d">Tastatur-first Retro-Konsole mit Befehlszeile, Statuszeile und ASCII-Balken.</div></span></a></li>
+    <li><a class="v" href="04-lernpfad/"><span class="n">04</span><span><div class="t">Lernpfad / Journey</div><div class="d">Mobile-first Pfad aus Kapitel-Knoten, Bottom-Sheets, Tab-Bar, Gamification.</div></span></a></li>
+    <li><a class="v" href="05-brutal/"><span class="n">05</span><span><div class="t">Neo-Brutalist Exam Board</div><div class="d">Kanban-Board pro Kurs, dicke Rahmen, harte Schatten, Swipe-Karteikarten.</div></span></a></li>
+    <li><a class="v" href="06-stories/"><span class="n">06</span><span><div class="t">Stories 📱💻</div><div class="d">Kapitel als Stories zum Durchtippen; am Mac 3-Spalten mit Story-Player in der Mitte.</div></span></a></li>
+    <li><a class="v" href="07-chat/"><span class="n">07</span><span><div class="t">Lern-Chat 📱💻</div><div class="d">Messenger mit Tutor-Bot (regelbasiert), Quick-Reply-Chips; am Mac mehrspaltig.</div></span></a></li>
+    <li><a class="v" href="08-native/"><span class="n">08</span><span><div class="t">Native App 📱💻</div><div class="d">iOS-Feeling am Handy (Large Titles, Tab-Bar, Sheets), macOS-Split-View am MacBook.</div></span></a></li>
+    <li><a class="v" href="09-swiss/"><span class="n">09</span><span><div class="t">Swiss Data Cockpit 📱💻</div><div class="d">Strenges Raster, Helvetica, Signalrot, echte Lern-Statistiken als Diagramme.</div></span></a></li>
+    <li><a class="v" href="10-schreibtisch/"><span class="n">10</span><span><div class="t">Schreibtisch 📱💻</div><div class="d">Haptischer Lernschreibtisch: Karteikasten, Klemmbrett, Ordner, Küchenwecker.</div></span></a></li>
+  </ol>
+  <footer>Original: <a href="../">../index.html</a> · Start: <code>./start.sh</code> → <code>http://localhost:8080/versionen/</code></footer>
+</body>
+</html>
