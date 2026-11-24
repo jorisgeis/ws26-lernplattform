@@ -2,14 +2,14 @@
 // Pure logic + data access only — every variant renders its own UI on top of this.
 // Uses the same store (localStorage key) as the original app, so progress is shared.
 
-import { COURSES_META } from '../../js/data/courses.js';
-import { GDP1_DATA } from '../../js/data/gdp1.js';
-import { GDP2_DATA } from '../../js/data/gdp2.js';
-import { ICS_DATA } from '../../js/data/ics.js';
-import { ENGLISH_DATA } from '../../js/data/english.js';
-import { RATINGS, reviewCard, previewIntervals, isDue, getCardStatus, interleaveItems } from '../../js/engine/sm2.js';
-import { store } from '../../js/engine/store.js';
-import { DIAGRAMS } from '../../js/engine/diagrams.js';
+import { COURSES_META } from './data/courses.js';
+import { GDP1_DATA } from './data/gdp1.js';
+import { GDP2_DATA } from './data/gdp2.js';
+import { ICS_DATA } from './data/ics.js';
+import { ENGLISH_DATA } from './data/english.js';
+import { RATINGS, reviewCard, previewIntervals, isDue, getCardStatus, interleaveItems } from './engine/sm2.js';
+import { store } from './engine/store.js';
+import { DIAGRAMS } from './engine/diagrams.js';
 
 export { COURSES_META, ENGLISH_DATA, DIAGRAMS, RATINGS, store, previewIntervals, getCardStatus, isDue };
 
@@ -37,9 +37,19 @@ export function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-/** PDF paths in COURSES_META are project-root relative; variants live two levels deeper. */
+/** PDF paths in COURSES_META are project-root relative locally; online (GitHub Pages) they open the Moodle course. */
+const MOODLE_FALLBACK = {
+  'gdp1': 'https://moodle.oncampus.de/course/view.php?id=40973',
+  'gdp2': 'https://moodle.oncampus.de/course/view.php?id=40976',
+  'internettechnologie': 'https://moodle.oncampus.de/course/view.php?id=41025',
+  'english-cs': 'https://moodle.oncampus.de/course/view.php?id=41019',
+};
 export function pdfHref(path) {
-  return '../../' + encodeURI(path);
+  if (typeof location !== 'undefined' && !['localhost', '127.0.0.1'].includes(location.hostname)) {
+    const slug = String(path || '').split('/')[1];
+    if (MOODLE_FALLBACK[slug]) return MOODLE_FALLBACK[slug];
+  }
+  return encodeURI(path);
 }
 
 /* ---------- Flashcards (SM-2) ---------- */

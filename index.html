@@ -1,93 +1,57 @@
-<!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<!doctype html>
+<html lang="de" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WS 26/27 Lernplattform — Evidenzbasiertes Lernen (HSEL)</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="StudyOS">
+  <meta name="format-detection" content="telephone=no">
+  <title>StudyOS · Native</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="css/diagrams.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Theme before first paint: stored choice (shared store key), otherwise the system setting.
+    (function () {
+      var t = null;
+      try {
+        var raw = localStorage.getItem('ws26_lernplattform_v1');
+        if (raw) t = JSON.parse(raw).theme || null;
+      } catch (e) { /* ignore */ }
+      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
 </head>
 <body>
-  <div class="app-shell">
-    <!-- Sidebar -->
-    <aside class="sidebar no-print">
-      <div class="brand">
-        <div class="brand-logo">⚡</div>
-        <div>
-          <div class="brand-title">StudyOS WS26</div>
-          <div class="brand-sub">HSEL • Evidenzbasiert</div>
-        </div>
-      </div>
+  <div class="wallpaper" aria-hidden="true"></div>
 
-      <nav class="nav-list" id="nav-list">
-        <button class="nav-item active" data-view="dashboard">
-          <span class="nav-ico">🏠</span><span>Lernzentrale</span>
-        </button>
-        <button class="nav-item" data-view="flashcards">
-          <span class="nav-ico">🧠</span><span>Spaced Repetition</span>
-          <span class="badge-pill" id="nav-due-badge">0</span>
-        </button>
-        <button class="nav-item" data-view="quiz">
-          <span class="nav-ico">🎯</span><span>Active Recall Quiz</span>
-        </button>
-        <button class="nav-item" data-view="courses">
-          <span class="nav-ico">📚</span><span>Kurse, Feynman &amp; PDFs</span>
-        </button>
-        <button class="nav-item" data-view="email">
-          <span class="nav-ico">✉️</span><span>GPAS Email-Coach</span>
-        </button>
-        <button class="nav-item" data-view="cheatsheet">
-          <span class="nav-ico">📄</span><span>DIN-A4 Spickzettel</span>
-          <span class="badge-pill subtle" id="nav-pin-badge">0</span>
-        </button>
-        <button class="nav-item" data-view="science">
-          <span class="nav-ico">🔬</span><span>Methoden &amp; Backup</span>
-        </button>
-      </nav>
-
-      <!-- Pomodoro Focus Widget -->
-      <div class="pomo-card">
-        <div class="pomo-header">
-          <span>🍅 Fokus-Timer</span>
-          <span id="pomo-mode" class="pomo-badge">25 Min</span>
-        </div>
-        <div class="pomo-time" id="pomo-display">25:00</div>
-        <div class="pomo-actions">
-          <button class="btn btn-sm btn-primary" id="pomo-toggle">Start</button>
-          <button class="btn btn-sm btn-ghost" id="pomo-reset">Reset</button>
-          <button class="btn btn-sm btn-ghost" id="pomo-switch" title="25/5 oder 50/10 wechseln">⇄</button>
-        </div>
-      </div>
-
-      <div class="sidebar-footer">
-        <button class="btn btn-ghost btn-sm full-width" id="theme-toggle">🌓 Theme wechseln</button>
-      </div>
-    </aside>
-
-    <!-- Main Stage -->
-    <main class="main-content">
-      <header class="topbar no-print">
-        <div class="topbar-left">
-          <h1 id="view-title">Lernzentrale</h1>
-          <span class="topbar-sub" id="view-subtitle">WS 26/27 • 4 Kurse synchronisiert aus Moodle</span>
-        </div>
-        <div class="topbar-right">
-          <div class="stat-chip" title="Tagesziel (Reviews + Quizfragen)">
-            <span>🎯 Heute:</span>
-            <strong id="top-today-count">0 / 25</strong>
-          </div>
-          <div class="stat-chip" title="Aktuelle Lernserie">
-            <span>🔥 Streak:</span>
-            <strong id="top-streak">0 Tage</strong>
-          </div>
-          <button class="btn btn-primary btn-sm" id="quick-interleave-btn">⚡ Interleaved Mix starten</button>
-        </div>
-      </header>
-
-      <div id="view-container" class="view-container"></div>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Seitenleiste"></aside>
+    <main class="main" id="main">
+      <div class="stack" id="stack"></div>
     </main>
+    <aside class="inspector" id="inspector" aria-label="Inspektor"></aside>
   </div>
 
-  <div id="toast" class="toast no-print"></div>
+  <nav class="tabbar" id="tabbar" aria-label="Tabs"></nav>
+
+  <div class="sheet-layer" id="sheet-layer"></div>
+  <div class="alert-layer" id="alert-layer"></div>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Filled right before printing; the only element visible in @media print -->
+  <section class="print-sheet" id="print-sheet" aria-hidden="true"></section>
+
+  <input type="file" id="import-file" accept="application/json,.json" hidden>
+
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

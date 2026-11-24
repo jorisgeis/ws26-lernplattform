@@ -1,19 +1,23 @@
-// Offline support for all variants under /versionen/ (registered from each variant as '../sw.js').
+// Offline support for StudyOS WS26 · Native (registered as './sw.js').
 // Network-first for same-origin GETs so updates appear immediately; cache fallback when offline.
 // Service workers only run in secure contexts: https://… or http://localhost.
 
-const CACHE = 'studyos-versionen-v1';
+const CACHE = 'studyos-native-v2';
 const PRECACHE = [
-  './shared/core.js',
-  './shared/diagrams.css',
-  '../js/data/courses.js',
-  '../js/data/gdp1.js',
-  '../js/data/gdp2.js',
-  '../js/data/ics.js',
-  '../js/data/english.js',
-  '../js/engine/sm2.js',
-  '../js/engine/store.js',
-  '../js/engine/diagrams.js',
+  './',
+  './index.html',
+  './css/style.css',
+  './css/diagrams.css',
+  './js/app.js',
+  './js/core.js',
+  './js/data/courses.js',
+  './js/data/gdp1.js',
+  './js/data/gdp2.js',
+  './js/data/ics.js',
+  './js/data/english.js',
+  './js/engine/sm2.js',
+  './js/engine/store.js',
+  './js/engine/diagrams.js',
 ];
 
 self.addEventListener('install', (event) => {
